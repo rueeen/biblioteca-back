@@ -1,0 +1,28 @@
+{% extends "catalogo/base.html" %}
+
+{% block content %}
+
+{% load static %}
+
+<h1>Detalle Libro</h1>
+
+<h2>{{book.titulo}}</h2>
+
+{% if book.portada %}
+<img class="portada" src="{{book.portada.url}}" alt="libro-portada-img">
+{% else %}
+<img class="portada" src="{% static 'catalogo/img/prohibido.avif' %}" alt="imagen por defecto">
+{% endif %}
+
+<p>{{book.descripcion|linebreaks}}</p>
+<!--Mostrar datos ForeingKey-->
+<p>Autor: {{book.autor.nombre}}</p>
+<!--Mostrar datos ManyToMany-->
+<p>Categorias:</p>
+<ul>
+    {% for categoria in book.categoria.all %}
+    <li>{{categoria.titulo}}</li>
+    {% endfor %}
+</ul>
+
+{% endblock content %}

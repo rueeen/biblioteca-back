@@ -1,0 +1,12 @@
+{% extends "catalogo/base.html" %}
+
+{% block content %}
+
+    <form method="post" >
+        {% csrf_token %}
+        <p>Esta seguro que desea eliminar el libro?</p>
+        <button class="btn btn-danger" type="submit">Si, eliminar</button>
+        <a href="#" class="btn btn-light">Volver</a>
+    </form>
+
+{% endblock content %}
