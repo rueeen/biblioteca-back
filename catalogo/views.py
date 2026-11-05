@@ -10,6 +10,9 @@ def homeView(request):
 ################## VISTAS LIBRO ##################
 
 def bookListView(request):
+    if not request.user.is_authenticated:
+        return redirect('403')
+    
     listado = Libro.objects.all() # -> SELECT * FROM Libro
     return render(request, "catalogo/books/book_list.html", {"listado": listado})
 
