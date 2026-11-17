@@ -28,6 +28,9 @@ class Libro(models.Model):
     categoria = models.ManyToManyField(Categoria, null=True)
     # imagen libro
     portada = models.ImageField(upload_to="portadas", null=True, blank=True)
+    # datos nuevos
+    precio = models.PositiveBigIntegerField(default=0)
+    stock = models.PositiveIntegerField(default=0)
     
     def __str__(self):
         return self.titulo

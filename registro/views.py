@@ -38,3 +38,6 @@ def error403View(request):
 def logoutView(request):    
     logout(request)
     return redirect('login')
+
+def perfil_view(request):
+    return render(request, '')

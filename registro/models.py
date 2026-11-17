@@ -19,4 +19,9 @@ class Perfil(models.Model):
     foto_perfil = models.ImageField(upload_to="perfil", null=True, blank=True)
     
     # usuario de django
-    usuario = models.OneToOneField(User, on_delete=models.CASCADE)    
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
+    
+    def es_cliente(self):
+        if self.rol.nombre == "Cliente":
+            return True
+        return False
