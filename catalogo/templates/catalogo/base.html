@@ -27,12 +27,23 @@
                     aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
                         <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+                        {% if user.is_authenticated %}
                         <a class="nav-link" href="{% url 'list-book' %}">Books</a>
                         <a class="nav-link" href="{% url 'list-author' %}">Authors</a>
                         <a class="nav-link" href="{% url 'list-category' %}">Categories</a>
+                        {% endif %}
+                    </div>
+
+                    <div>
+                        {% if user.is_authenticated %}                        
+                        <span>Bienvenido: {{user}}</span>
+                        <a href="{% url 'logout' %}">Cerrar sesion</a>
+                        {% else %}
+                        <a href="{% url 'login' %}">Iniciar sesion</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>

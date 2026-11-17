@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Libro, Autor, Categoria
 from .forms import LibroForm, AutorForm, CategoriaForm
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def homeView(request):
@@ -10,10 +11,15 @@ def homeView(request):
 ################## VISTAS LIBRO ##################
 
 def bookListView(request):
+    if not request.user.is_authenticated:
+        return redirect('403')
+    
     listado = Libro.objects.all() # -> SELECT * FROM Libro
-    return render(request, "catalogo/books/book_list.html", {"listado": listado})
+    return render(request, "catalogo/books/libro_card_list.html", {"listado": listado})
 
+@login_required
 def bookCreateView(request):
+    
     form = LibroForm(request.POST or None, request.FILES or None)
     if request.method == "POST":
         if form.is_valid():

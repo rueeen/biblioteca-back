@@ -2,7 +2,14 @@
 
 {% block content %}
 
+<p>Actualmente tiene permisos de:{{user.perfil.rol}}</p>
+{% if not user.perfil.es_cliente %}
 <a class="btn btn-primary" href="{% url 'create-book' %}">Nuevo Libro</a>
+{% endif %}
+
+{% if user.is_staff %}
+<p>Este campo solo lo ve un superadmin</p>
+{% endif %}
 
 <table class="table">
     <thead>
